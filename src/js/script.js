@@ -175,6 +175,7 @@
           } 
         }
       }
+      
       /* set the contents of thisProduct.priceElem to be the value of variable price */
       thisProduct.element.querySelector('.price').innerHTML = price;
     } 
