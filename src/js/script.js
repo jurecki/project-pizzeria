@@ -90,8 +90,7 @@
       thisProduct.formInputs = thisProduct.element.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
-
-    
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     
     }
 
@@ -172,14 +171,42 @@
           } 
           else if(!optionSelected && option.default) {
             price = price - option.price;
+          
           } 
+
+          /* Image management added */
+
+          const nameOfClass = paramId+"-"+optionId;
+          const imgElements = thisProduct.element.querySelectorAll("img");
+          
+          if(optionSelected) {
+            
+            
+            for (let imgElement of imgElements) {
+                
+                if(nameOfClass == imgElement.className) {
+                  imgElement.classList.add(classNames.menuProduct.imageVisible);
+                }
+                
+            }
+            
+          } else {
+            for (let imgElement of imgElements) {
+               const nameOfClass2 =nameOfClass+" "+classNames.menuProduct.imageVisible;
+                if(nameOfClass2 == imgElement.className) {
+                  imgElement.classList.remove(classNames.menuProduct.imageVisible);
+                }
+            }
+          }
+          
+          
+
+            /* set the contents of thisProduct.priceElem to be the value of variable price */
+            thisProduct.element.querySelector('.price').innerHTML = price;
+            }
         }
       }
-      
-      /* set the contents of thisProduct.priceElem to be the value of variable price */
-      thisProduct.element.querySelector('.price').innerHTML = price;
-    } 
-    }
+  }
 
   const app = {
     initMenu: function() {
