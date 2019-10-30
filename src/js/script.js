@@ -202,13 +202,13 @@
           }
 
             }
-
+          }
             /* multiply price by amount */
             price*= thisProduct.amountWidget.value;
             
             /* set the contents of thisProduct.priceElem to be the value of variable price */
             thisProduct.element.querySelector('.price').innerHTML = price;
-        }
+        
       }
 
       initAmountWidget() {
@@ -227,6 +227,7 @@
       const thisWidget = this;
 
       thisWidget.getElements(element);
+      thisWidget.value = settings.amountWidget.defaultValue;
       thisWidget.setValue(thisWidget.input.value);
       thisWidget.initActions();
       console.log('AmountWidget',thisWidget);
@@ -247,8 +248,13 @@
 
       const newValue = parseInt(value);
 
-      thisWidget.value = newValue;
-      thisWidget.announce();
+      if (newValue !=thisWidget.value && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax) {
+        thisWidget.value = newValue;
+        thisWidget.announce();
+      }
+      
+
+
       thisWidget.input.value = thisWidget.value;
     }
 
