@@ -98,10 +98,10 @@
 
       /* generate HTML based on template */
       const generatedHTML = templates.menuProduct(thisProduct.data);
-      
+   
       /* create element using utilis.createELementFromHTML */
       thisProduct.element = utils.createDOMFromHTML(generatedHTML);
-  
+      
       /* find menu container */
       const menuContainer = document.querySelector(select.containerOf.menu);
 
@@ -243,8 +243,6 @@
             
             /* set the contents of thisProduct.priceElem to be the value of variable price */
             thisProduct.priceElem.innerHTML = thisProduct.price;
-
-            console.log(thisProduct.params);
         
       }
 
@@ -261,9 +259,13 @@
       addToCart() {
         const thisProduct = this;
 
-        thisProduct.data.name = thisProduct.name;
-        thisProduct.amountWidget.value = thisProduct.amount;
+        thisProduct.name = thisProduct.data.name;
+        thisProduct.amount = thisProduct.amountWidget.value;
         app.cart.add(thisProduct);
+
+        console.log(thisProduct.name);
+        console.log(thisProduct.amount);
+
       }
   }
 
@@ -352,7 +354,7 @@
 
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
-      //console.log(thisCart.dom.wrapper);
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
     }
 
     initAction() {
@@ -370,16 +372,13 @@
       console.log('adding product', menuProduct);
 
       /* generate HTML based on template */
-      const generatedHTML = templates.cartProduct(thisCart);
-      
-      /* create element using utilis.createELementFromHTML */
-      thisCart.element = utils.createDOMFromHTML(generatedHTML);
-      
-      /* find cart container */
-      const menuCart = document.querySelector(select.cart.productList);
+      const generatedHTML = templates.cartProduct(menuProduct);
+      console.log(generatedHTML);
+      /* create generatedDOM using utilis.createELementFromHTML */
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
       
       /* add element to cart */
-      menuCart.appendChild(thisCart.element);
+      thisCart.dom.productList.appendChild(generatedDOM);
     }
   }
 
