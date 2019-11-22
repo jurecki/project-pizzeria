@@ -27,7 +27,7 @@
 		},
 		widgets: {
 			amount: {
-				input: 'input[name="amount"]',
+				input: 'input.amount',
 				linkDecrease: 'a[href="#less"]',
 				linkIncrease: 'a[href="#more"]'
 			}
@@ -46,7 +46,7 @@
 		},
 		cartProduct: {
 			amountWidget: '.widget-amount',
-			price: 'cart__product-price',
+			price: '.cart__product-price',
 			edit: '[href="#edit"]',
 			remove: '[href="#remove"]'
 		}
@@ -241,8 +241,8 @@
 
 		initAmountWidget() {
 			const thisProduct = this;
-
-			thisProduct.amountWidget = new AmountWiget(thisProduct.amountWidgetElem);
+			
+			thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
 
 			thisProduct.amountWidgetElem.addEventListener('updated', function() {
 				thisProduct.processOrder();
@@ -258,14 +258,14 @@
 		}
 	}
 
-	class AmountWiget {
+	class AmountWidget {
 		constructor(element) {
 			const thisWidget = this;
 
 			thisWidget.getElements(element);
 
 			thisWidget.value = settings.amountWidget.defaultValue;
-			thisWidget.setValue(thisWidget.input.value);
+			thisWidget.setValue(thisWidget.value);
 			thisWidget.initActions();
 		}
 
@@ -318,7 +318,7 @@
 			const thisWidget = this;
 
 			const event = new CustomEvent('updated', {
-				bubles: true
+				bubbles: true
 			});
 
 			thisWidget.element.dispatchEvent(event);
@@ -380,6 +380,11 @@
 			const thisCart = this;
 
 			const url = settings.db.url + '/' + settings.db.order;
+			/*event change update wartości albo ręczne zczytanie wartości */
+			console.log(thisCart.dom.wrapper);
+			thisCart.dom.phone = thisCart.dom.wrapper.querySelector(select.cart.phone).value;
+
+			console.log('telefon:',thisCart.dom.phone)
 
 			const payload = {
 				phone: thisCart.dom.phone,
@@ -486,7 +491,10 @@
 			thisCartProduct.params = JSON.parse(JSON.stringify(menuProduct.params));
 
 			thisCartProduct.getElements(element);
+			thisCartProduct.initAmountWidget(element);
 			thisCartProduct.initAction();
+			
+
 		}
 
 		getElements(element) {
@@ -495,26 +503,26 @@
 			thisCartProduct.dom = {};
 
 			thisCartProduct.dom.wrapper = element;
-			thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(
-				select.cartProduct.amountWidget
-			);
+			thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
 			thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
 			thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
 			thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
-
-			thisCartProduct.initAmountWidget(element);
+			
 		}
 
 		initAmountWidget() {
 			const thisCartProduct = this;
+			
+			thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
 
-			/*
-      thisCartProduct.amountWidget = new AmountWiget(thisCartProduct.dom.amountWidget);
-      
-      thisCartProduct.amountWidgetElem.addEventListener('updated', function(){
-        ;
-      })
-      */
+			thisCartProduct.dom.amountWidget.addEventListener('updated', function() {
+				
+				thisCartProduct.amount = thisCartProduct.amountWidget.value;
+				thisCartProduct.price = thisCartProduct.priceSingle*thisCartProduct.amount;
+
+				thisCartProduct.dom.price.innerHTML = thisCartProduct.price
+
+			});
 		}
 
 		remove() {
