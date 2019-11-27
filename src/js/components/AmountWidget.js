@@ -11,7 +11,7 @@ class AmountWidget extends BaseWidget {
 
         thisWidget.initActions();
         
-        console.log('AmountWidget', thisWidget)
+        //console.log('AmountWidget', thisWidget)
     }
 
     getElements() {
@@ -23,8 +23,7 @@ class AmountWidget extends BaseWidget {
     }
 
     isValid(value) {
-        return
-        !isNaN(value)
+        return !isNaN(value)
         && value >= settings.amountWidget.defaultMin 
         && value <= settings.amountWidget.defaultMax
         
@@ -41,7 +40,8 @@ class AmountWidget extends BaseWidget {
 
        thisWidget.dom.input.addEventListener('change', function() {
             //console.log('input change');
-            thisWidget.setValue(thisWidget.dom.input.value);
+            //thisWidget.setValue(thisWidget.dom.input.value);
+            thisWidget.value = thisWidget.dom.input.value;
         });
 
         thisWidget.dom.linkDecrease.addEventListener('click', function(event) {
