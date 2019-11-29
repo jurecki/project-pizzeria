@@ -255,5 +255,15 @@
       "starters": ["lemonWater"]
     }
   ],
-  "booking": []
+  "booking": [
+    {
+      "id": 1,
+      "date": "2019-12-01",
+      "hour": "17:00",
+      "table": 3,
+      "duration": 2,
+      "ppl": 3,
+      "starters": ["bread", "lemonWater"]
+    }
+  ]
 }
