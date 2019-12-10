@@ -59,7 +59,7 @@
   
   .rangeSlider {
     top: $base-size;
-    background: lighten($color-dark, 70%);
+    background: green;
     box-shadow: none;
     height: $base-size;
   
@@ -83,11 +83,21 @@
     }
   
     &__fill {
-      background: $color-success;
+      background: none;
       transition-timing-function: cubic-bezier(0, 1, 0, 1);
       transition: width 100ms;
       box-shadow: none;
     }
+  }
+
+  /* rangeSlider_booking */
+
+  .rangeSlider__booking {
+    height: 20px;
+    width: 250px;
+    background: red;
+    position: absolute;
+    top: 55px;
   }
   
   .flatpickr-day {

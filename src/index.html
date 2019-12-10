@@ -64,7 +64,6 @@
 
   <div id="pages">
     <section id="home">
-      <section class='services'>
         <div class='container'>
             <div class='order'>
               <div class='section-title'>
@@ -76,7 +75,6 @@
               </div>
             </div>
             <div class='book_table'>
-              <a href='http://localhost:3000/#/booking'>
                 <div class='section-title'>
                   BOOK A TABLE
                 </div>
@@ -84,8 +82,6 @@
                     BOOK A TABLE <br>
                     <span>Lorepm ipsum lorem ipsum</span>
                 </div>
-                <span></span>
-              </a>
             </div>
             <div class='opening_hours'>
                 <div class='section-title'>
@@ -93,47 +89,41 @@
                 <span>TUE-SUN, 12PM-12AM</span>
                 </div>
             </div>
-          </div>
-      </section>
-      <section class='crousel'>
-        <div class='container'>
-            <div class="slideshow-container">
-                <div class="mySlides fade">
-                  <div class="text">
-                  <h1>Lorem ipsum dolor sit amet</h1>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at ante nec tellus tempus commodo. Praesent vestibulum egestas arcu vitae cursus. Mauris eu ipsum vitae odio vestibulum blandit sit amet non quam. Vestibulum euismod fringilla nisi, ac lobortis eros convallis eget. Phasellus quis nisi in augue hendrerit vehicula.
-                  </p></div>
-                </div>
-                
-                <div class="mySlides fade">
-                  <div class="text">
-                    <h1>Incididunt ut labore et dolore magna aliqua.</h1>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at ante nec tellus tempus commodo. Praesent vestibulum egestas arcu vitae cursus. Mauris eu ipsum vitae odio vestibulum blandit sit amet non quam. Vestibulum euismod fringilla nisi, ac lobortis eros convallis eget. Phasellus quis nisi in augue hendrerit vehicula.
-                  </p></div>
-                  </div>
-                </div>
-                
-                <div class="mySlides fade">
-                  <div class="text">
-                    <h1>Consectetur adipiscing elit</h1>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at ante nec tellus tempus commodo. Praesent vestibulum egestas arcu vitae cursus. Mauris eu ipsum vitae odio vestibulum blandit sit amet non quam. Vestibulum euismod fringilla nisi, ac lobortis eros convallis eget. Phasellus quis nisi in augue hendrerit vehicula.
-                  </p></div>
-                  </div>
-                </div>
-                
-                </div>
-                <br>
-                
-                <div style="text-align:center">
-                  <span class="dot"></span> 
-                  <span class="dot"></span> 
-                  <span class="dot"></span> 
-                </div>
-
         </div>
-      </section>
-      </section>
-      <section class='gallery'>
+        <div class='container'>
+            <div class='flex-row'>
+              <div class='slider-img'>
+              </div>
+              <div class="slideshow-container">
+                  <div class="mySlides fade">
+                    <div class="text">
+                    <h1>Lorem ipsum dolor sit amet</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at ante nec tellus tempus commodo. Praesent vestibulum egestas arcu vitae cursus. Mauris eu ipsum vitae odio vestibulum blandit sit amet non quam. Vestibulum euismod fringilla nisi, ac lobortis eros convallis eget. Phasellus quis nisi in augue hendrerit vehicula.
+                    </p>
+                  </div>
+                  </div>
+                  <div class="mySlides fade">
+                    <div class="text">
+                      <h1>Incididunt ut labore et dolore magna aliqua.</h1>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at ante nec tellus tempus commodo. Praesent vestibulum egestas arcu vitae cursus. Mauris eu ipsum vitae odio vestibulum blandit sit amet non quam. Vestibulum euismod fringilla nisi, ac lobortis eros convallis eget. Phasellus quis nisi in augue hendrerit vehicula.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="mySlides fade">
+                        <div class="text">
+                        <h1>Consectetur adipiscing elit</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at ante nec tellus tempus commodo. Praesent vestibulum egestas arcu vitae cursus. Mauris eu ipsum vitae odio vestibulum blandit sit amet non quam. Vestibulum euismod fringilla nisi, ac lobortis eros convallis eget. Phasellus quis nisi in augue hendrerit vehicula.</p>
+                        </div>
+                  </div>
+              <br>
+              <div style="text-align:center">
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+              </div>
+              </div>
+            </div>
+        </div>
         <div class='container'>
             <div class='flex-row'>
                 <div class='element flex-1 img-1'>
@@ -175,8 +165,8 @@
                     </div>
                 </div>   
             </div>
+            <a href='#'> View more on instagram </a>
         </div>
-      </section>
     </section>
     <section id="order">
       <div id="product-list" class="product-list container"></div>
@@ -199,6 +189,7 @@
               <div class="output"></div>
               <label class="booking-option-title">Pick a time</label>
             <input type="range" name="hour" value="12" min="12" max="24" step="0.5">
+            <div class="rangeSlider__booking rangeSlider__fill rangeSlider__fill__horizontal" style="width: 12px;"></div>
           </div>
         </div>
         <div class="floor-plan">

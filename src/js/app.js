@@ -57,16 +57,25 @@ const app = {
 			
 			for(let page of thisApp.pages) {
 			page.classList.toggle(classNames.pages.active, page.id==pageId);
+			
 			}
 			/* add class 'active' to matching links, remove from non-matching */ 
-		
+			
 			for(let link of thisApp.navLinks) {
 				link.classList.toggle(
 					classNames.nav.active, 
 					link.getAttribute('href') == '#' + pageId
 					);
 				}
-
+			/* navigation on home_page
+			const order = document.getElementsByClassName('order')
+			for(let i=0; i<order.length; i++) {
+				order[i].addEventListener("click", function() {
+					page.classList.toggle(classNames.pages.active, page.id==pageId);
+					console.log('przejdz do order')
+			}
+			)};
+			*/
 		},
 
 		initMenu: function() {
