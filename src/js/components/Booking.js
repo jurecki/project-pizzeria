@@ -209,8 +209,11 @@ class Booking {
 		thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
 		thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
 
-		thisBooking.dom.wrapper.addEventListener('updated', function() {
-			thisBooking.updateDOM();
+		thisBooking.dom.wrapper.addEventListener('updated', function(event) {
+			if(!event.target.classList.contains('widget-amount')) {
+				thisBooking.updateDOM();
+			}
+			
         });
 
 		thisBooking.dom.wrapper.addEventListener('submit', function(event) {
