@@ -4,7 +4,7 @@
     "description": "",
     "engines": {
         "node": "10.15.3"
-      },
+    },
     "main": "index.html",
     "scripts": {
         "init-project": "npm install && npm-run-all init:*",

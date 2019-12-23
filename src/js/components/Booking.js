@@ -20,9 +20,9 @@ class Booking {
 		const endDateParam = settings.db.dateEndParamKey + '=' + utils.dateToStr(thisBooking.datePicker.maxDate);
 
 		const params = {
-			booking: [ startDateParam, endDateParam ],
-			eventCurrent: [ settings.db.notRepeatParam, startDateParam, endDateParam ],
-			eventRepeat: [ settings.db.repeatParam, startDateParam, endDateParam ]
+			booking: [startDateParam, endDateParam],
+			eventCurrent: [settings.db.notRepeatParam, startDateParam, endDateParam],
+			eventRepeat: [settings.db.repeatParam, startDateParam, endDateParam]
 		};
 
 		//   console.log('getData', params);
@@ -34,8 +34,8 @@ class Booking {
 		};
 
 		//   console.log('getData url', urls);
-		Promise.all([ fetch(urls.booking), fetch(urls.eventsCurrent), fetch(urls.eventsRepeat) ])
-			.then(function(allResponses) {
+		Promise.all([fetch(urls.booking), fetch(urls.eventsCurrent), fetch(urls.eventsRepeat)])
+			.then(function (allResponses) {
 				const bookingsResponse = allResponses[0];
 				const eventsCurrentResponse = allResponses[1];
 				const eventsRepeatResponse = allResponses[2];
@@ -45,7 +45,7 @@ class Booking {
 					eventsRepeatResponse.json()
 				]);
 			})
-			.then(function([ bookings, eventsCurrent, eventsRepeat ]) {
+			.then(function ([bookings, eventsCurrent, eventsRepeat]) {
 				//  console.log(bookings);
 				//  console.log(eventsCurrent);
 				//  console.log(eventsRepeat);
@@ -127,7 +127,7 @@ class Booking {
 			}
 
 			// choose available table
-			table.addEventListener('click', function(event) {
+			table.addEventListener('click', function (event) {
 				event.preventDefault();
 				if (!table.classList.contains(classNames.booking.tableBooked)) {
 					table.classList.add(classNames.booking.tableBooked);
@@ -141,7 +141,7 @@ class Booking {
 		const thisBooking = this;
 
 		const url = settings.db.url + '/' + settings.db.booking;
-		
+
 
 		thisBooking.starters = [];
 
@@ -150,13 +150,13 @@ class Booking {
 		}
 		if (thisBooking.dom.wrapper.querySelector("input[type='checkbox'][value='water']").checked) {
 			thisBooking.starters.push('lemonWater');
-        }
-        
-        thisBooking.people = thisBooking.dom.wrapper.querySelector("input[name='people']").value;
-        thisBooking.duration = thisBooking.dom.wrapper.querySelector("input[name='hours']").value;
- 
-        
-        const payload = {
+		}
+
+		thisBooking.people = thisBooking.dom.wrapper.querySelector("input[name='people']").value;
+		thisBooking.duration = thisBooking.dom.wrapper.querySelector("input[name='hours']").value;
+
+
+		const payload = {
 			date: thisBooking.date,
 			hour: thisBooking.hourPicker.value,
 			table: thisBooking.table,
@@ -165,22 +165,21 @@ class Booking {
 			starters: thisBooking.starters,
 		};
 
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-        };
+		const options = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(payload)
+		};
 
-        fetch(url, options)
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (parsedResponse) {
-                console.log('parsedResponse', parsedResponse);
-            });
-            
+		fetch(url, options)
+			.then(function (response) {
+				return response.json();
+			})
+			.then(function (parsedResponse) {
+			});
+
 	}
 
 	render(wrapper) {
@@ -209,14 +208,14 @@ class Booking {
 		thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
 		thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
 
-		thisBooking.dom.wrapper.addEventListener('updated', function(event) {
-			if(!event.target.classList.contains('widget-amount')) {
+		thisBooking.dom.wrapper.addEventListener('updated', function (event) {
+			if (!event.target.classList.contains('widget-amount')) {
 				thisBooking.updateDOM();
 			}
-			
-        });
 
-		thisBooking.dom.wrapper.addEventListener('submit', function(event) {
+		});
+
+		thisBooking.dom.wrapper.addEventListener('submit', function (event) {
 			event.preventDefault();
 			thisBooking.sendBooking();
 		});
