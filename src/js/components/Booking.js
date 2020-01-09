@@ -7,10 +7,11 @@ import HourPicker from './HourPicker.js';
 class Booking {
 	constructor(element) {
 		const thisBooking = this;
-
+		
 		thisBooking.render(element);
 		thisBooking.initWidgets();
 		thisBooking.getData();
+		
 	}
 
 	getData() {
@@ -101,19 +102,18 @@ class Booking {
 
 	}
 
-	updateDOM() {
-		const thisBooking = this;
-
-		thisBooking.date = thisBooking.datePicker.value;
-		thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
-
+	updateHourPicker() {
 		// start update HourPicker
+		const thisBooking = this;
+		
+		thisBooking.date = thisBooking.datePicker.value;
+		
+		for (let i = 12; i <= 24; i += 0.5) {
 
-		// godziny, w których wszystkie stoliki są zajęte, miały czerwone tło suwaka,
-		// godziny, w których dostępny jest tylko jeden stolik, miały pomarańczowe tło suwaka,
-		// pozostałe godziny zielony
-
-		//console.log(thisBooking.booked[thisBooking.date]);
+			if (typeof thisBooking.booked[thisBooking.date][i] !== 'undefined') {
+			document.getElementById(i).classList.remove('red','orange');
+			}
+		}
 
 		for (let i = 12; i <= 24; i += 0.5) {
 
@@ -127,6 +127,15 @@ class Booking {
 				document.getElementById(i).classList.add('orange');
 			}
 		}
+		
+	}
+
+	updateDOM() {
+		const thisBooking = this;
+
+		thisBooking.date = thisBooking.datePicker.value;
+		thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
+
 
 		let allAvailable = false;
 
@@ -158,6 +167,8 @@ class Booking {
 				}
 			});
 		}
+
+		thisBooking.updateHourPicker();
 	}
 
 	sendBooking() {
@@ -200,8 +211,7 @@ class Booking {
 			.then(function (response) {
 				return response.json();
 			});
-			//.then(function (parsedResponse) {
-			//});
+			//.then(function (parsedResponse) {});
 
 	}
 
@@ -230,12 +240,12 @@ class Booking {
 		thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
 		thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
 		thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
+	
 
 		thisBooking.dom.wrapper.addEventListener('updated', function (event) {
 			if (!event.target.classList.contains('widget-amount')) {
 				thisBooking.updateDOM();
 			}
-
 		});
 
 		thisBooking.dom.wrapper.addEventListener('submit', function (event) {
