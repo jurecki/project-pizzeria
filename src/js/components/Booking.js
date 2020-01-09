@@ -25,7 +25,7 @@ class Booking {
 			eventRepeat: [settings.db.repeatParam, startDateParam, endDateParam]
 		};
 
-		//   console.log('getData', params);
+		//console.log('getData', params);
 
 		const urls = {
 			booking: settings.db.url + '/' + settings.db.booking + '?' + params.booking.join('&'),
@@ -33,7 +33,8 @@ class Booking {
 			eventsRepeat: settings.db.url + '/' + settings.db.event + '?' + params.eventRepeat.join('&')
 		};
 
-		//   console.log('getData url', urls);
+		// console.log('getData url', urls);
+
 		Promise.all([fetch(urls.booking), fetch(urls.eventsCurrent), fetch(urls.eventsRepeat)])
 			.then(function (allResponses) {
 				const bookingsResponse = allResponses[0];
@@ -46,9 +47,9 @@ class Booking {
 				]);
 			})
 			.then(function ([bookings, eventsCurrent, eventsRepeat]) {
-				//  console.log(bookings);
-				//  console.log(eventsCurrent);
-				//  console.log(eventsRepeat);
+				//   console.log(bookings);
+				//   console.log(eventsCurrent);
+				//   console.log(eventsRepeat);
 				thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
 			});
 	}
@@ -97,6 +98,7 @@ class Booking {
 
 			thisBooking.booked[date][hourBlock].push(table);
 		}
+
 	}
 
 	updateDOM() {
@@ -104,6 +106,27 @@ class Booking {
 
 		thisBooking.date = thisBooking.datePicker.value;
 		thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
+
+		// start update HourPicker
+
+		// godziny, w których wszystkie stoliki są zajęte, miały czerwone tło suwaka,
+		// godziny, w których dostępny jest tylko jeden stolik, miały pomarańczowe tło suwaka,
+		// pozostałe godziny zielony
+
+		//console.log(thisBooking.booked[thisBooking.date]);
+
+		for (let i = 12; i <= 24; i += 0.5) {
+
+			if (typeof thisBooking.booked[thisBooking.date][i] !== 'undefined' &&
+				thisBooking.booked[thisBooking.date][i].length == 3) {
+				document.getElementById(i).classList.add('red');
+			}
+
+			if (typeof thisBooking.booked[thisBooking.date][i] !== 'undefined' &&
+				thisBooking.booked[thisBooking.date][i].length == 2) {
+				document.getElementById(i).classList.add('orange');
+			}
+		}
 
 		let allAvailable = false;
 
@@ -176,9 +199,9 @@ class Booking {
 		fetch(url, options)
 			.then(function (response) {
 				return response.json();
-			})
-			.then(function (parsedResponse) {
 			});
+			//.then(function (parsedResponse) {
+			//});
 
 	}
 

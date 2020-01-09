@@ -90,15 +90,45 @@
     }
   }
 
+  .rangeSlider__handle__horizontal {
+    z-index: 1;
+  }
+
   /* rangeSlider_booking */
 
   .rangeSlider__booking {
-    height: 20px;
-    width: 250px;
-    background: red;
     position: absolute;
-    top: 55px;
+    top: 70px;
+    display: flex;
+    
+    & div {
+      height: 12px;
+      width: 12px;
+      border: 1px solid black;
+    }
   }
+
+  .rangeSlider__booking-element:first-child {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+  }
+
+  .rangeSlider__booking-element:last-child {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+
+
+  .red {
+    background: red;
+  }
+
+  .orange {
+    background: orange;
+  }
+
+
+
   
   .flatpickr-day {
     &.disabled {

@@ -65,7 +65,7 @@ class CartProduct {
 
         thisCartProduct.dom.edit.addEventListener('click', function(event) {
             event.preventDefault();
-            console.log('edycja produktu');
+            //console.log('edycja produktu');
         });
         thisCartProduct.dom.remove.addEventListener('click', function(event) {
             event.preventDefault();
